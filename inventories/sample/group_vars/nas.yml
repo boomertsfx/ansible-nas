@@ -9,10 +9,64 @@
 # Add your all.yml config overrides to this file. See group_vars/all.yml for all possible settings.
 
 # Example options
-ansible_nas_hostname: ansible-nas
+ansible_nas_hostname: ubuntu.graeme.org
 ansible_nas_timezone: Etc/UTC
 
 ## Enable some applications
 heimdall_enabled: true
 portainer_enabled: true
+portainer_available_externally: true
+organizr_enabled: true
+traefik_enabled: true
+traefik_port_http: "81"
+traefik_port_https: "444"
+traefik_port_ui: "8083"
+# traefik_debug: "true"
 
+# Password Management
+bitwarden_enabled: true
+
+cloudflare_ddns_enabled: true
+nzbget_enabled: true
+sonarr_enabled: true
+radarr_enabled: true
+youtubedlmaterial_enabled: true
+gitlab_enabled: true
+
+
+# Sets the hostname of your Ansible NAS
+ansible_nas_hostname: ubuntu
+
+# Sets the timezone for your Ansible NAS
+# You can find a list here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ansible_nas_timezone: Etc/UTC
+
+# Update all apt packages when playbook is run
+keep_packages_updated: true
+
+# Will be added to the docker group to give user command line access to docker
+ansible_nas_user: graeme
+
+# Your email and domain, used for Let's Encrypt SSL certs
+ansible_nas_email: graeme@graeme.org
+
+# Applications will have subdomain SSL certificates created if Traefik is enabled, e.g. ansible-nas.<your-domain>, nextcloud.<your-domain>
+ansible_nas_domain: test.graeme.org
+
+###
+### Cloudflare
+###
+# Cloudflare is a great free DNS option for domains. If you use the cloudflare_ddns container then you'll need to
+# set the options below.
+
+# Your domain name
+cloudflare_zone: "{{ ansible_nas_domain }}"
+
+# The hostname you want the container to update. You shouldn't need to change this.
+cloudflare_host: "*.{{ cloudflare_zone }}"
+
+# Email address used to register for Cloudflare
+cloudflare_email: "{{ ansible_nas_email }}"
+
+# Cloudflare 'Global API Key', can be found on the 'My Profile' page
+cloudflare_api_key: 9187d4680099bc4d25333b97942fead92f82e

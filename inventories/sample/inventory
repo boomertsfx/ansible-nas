@@ -15,4 +15,4 @@
 # ansible-nas ansible_connection=local ansible_host=localhost
 
 [nas]
-ansible-nas
+ubuntu.graeme.org
